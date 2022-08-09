@@ -17,6 +17,8 @@ class BotActivityHandler extends TeamsActivityHandler {
       } else if (text === "fetch-roster") {
         let continuationToken;
         const members = [];
+        
+        console.dir({ context })
 
         do {
             var pagedMembers = await TeamsInfo.getPagedMembers(context, 100, continuationToken);
