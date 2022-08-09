@@ -19,7 +19,7 @@ class BotActivityHandler extends TeamsActivityHandler {
         var members = [];
 
         do {
-            var pagedMembers = await TeamsInfo.getPagedMembers(TurnContext, 100, continuationToken);
+            var pagedMembers = await TeamsInfo.getPagedMembers(context, 100, continuationToken);
             continuationToken = pagedMembers.continuationToken;
             members.push(...pagedMembers.members);
         }
