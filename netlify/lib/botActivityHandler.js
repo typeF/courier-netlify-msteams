@@ -24,6 +24,8 @@ class BotActivityHandler extends TeamsActivityHandler {
             members.push(...pagedMembers.members);
         }
         while(continuationToken !== undefined)
+          
+        console.dir({ members }, { depth: null });
 
         members.forEach(async member => {
           await context.sendActivity(`Member: ${member}`);
