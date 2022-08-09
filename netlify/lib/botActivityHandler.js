@@ -1,4 +1,4 @@
-const { TurnContext, TeamsActivityHandler } = require("botbuilder");
+const { TurnContext, TeamsActivityHandler, TeamsInfo } = require("botbuilder");
 const { CourierClient } = require("@trycourier/courier");
 const courier = CourierClient();
 
@@ -14,6 +14,20 @@ class BotActivityHandler extends TeamsActivityHandler {
         await this.updateCourierProfile(context);
       } else if (text === "test") {
         await context.sendActivity(`Your bot has been successfully added.`);
+      } else if (text === "fetch-roster") {
+        var continuationToken;
+        var members = [];
+
+        do {
+            var pagedMembers = await TeamsInfo.getPagedMembers(turnContext, 100, continuationToken);
+            continuationToken = pagedMembers.continuationToken;
+            members.push(...pagedMembers.members);
+        }
+        while(continuationToken !== undefined)
+
+        members.forEach(async member => {
+          await context.sendActivity(`Member: ${member}`);
+        });
       }
 
       await next();
