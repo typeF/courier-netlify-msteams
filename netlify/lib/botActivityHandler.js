@@ -18,7 +18,7 @@ class BotActivityHandler extends TeamsActivityHandler {
         let continuationToken;
         const members = [];
         
-        console.dir({ context })
+        console.dir({ context }, { deppth: null })
 
         do {
             var pagedMembers = await TeamsInfo.getPagedMembers(context, 100, continuationToken);
