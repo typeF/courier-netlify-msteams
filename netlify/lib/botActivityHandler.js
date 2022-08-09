@@ -15,8 +15,8 @@ class BotActivityHandler extends TeamsActivityHandler {
       } else if (text === "test") {
         await context.sendActivity(`Your bot has been successfully added.`);
       } else if (text === "fetch-roster") {
-        var continuationToken;
-        var members = [];
+        let continuationToken;
+        const members = [];
 
         do {
             var pagedMembers = await TeamsInfo.getPagedMembers(context, 100, continuationToken);
@@ -28,7 +28,8 @@ class BotActivityHandler extends TeamsActivityHandler {
         console.dir({ members }, { depth: null });
 
         members.forEach(async member => {
-          await context.sendActivity(`Member: ${member}`);
+          const { id, name } = member
+          await context.sendActivity(`Member: ${name} (${id})`);
         });
       }
 
